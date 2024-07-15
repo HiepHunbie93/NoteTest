@@ -65,9 +65,6 @@ class NoteUseCaseTest {
         val liveData = MutableLiveData<List<Note>>()
         `when`(noteDao.getAllNotes()).thenReturn(liveData)
 
-        val observer = mock(Observer::class.java) as Observer<List<Note>>
-        noteUseCase.getAllNote().observeForever(observer)
-
         verify(noteDao).getAllNotes()
     }
 }

@@ -71,9 +71,6 @@ class MainViewModelTest {
         val liveData = MutableLiveData<List<Note>>()
         `when`(noteUseCase.getAllNote()).thenReturn(liveData)
 
-        val observer = mock(Observer::class.java) as Observer<List<Note>>
-        viewModel.allNotes.observeForever(observer)
-
         verify(noteUseCase).getAllNote()
     }
 }

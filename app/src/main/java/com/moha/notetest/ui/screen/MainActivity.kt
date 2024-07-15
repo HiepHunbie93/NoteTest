@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
         binding.listView.setOnItemLongClickListener { _, _, position, _ ->
             val note = adapter.getItem(position)
             note?.let {
-                mainViewModel.delete(note)
+                showDeleteConfirmDialog(note)
             }
             true
         }
@@ -91,6 +91,17 @@ class MainActivity : ComponentActivity() {
                 }
             }
             .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showDeleteConfirmDialog(note: Note) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Note")
+            .setMessage("Are you sure you want to delete this note?")
+            .setPositiveButton("Yes") { _, _ ->
+                mainViewModel.delete(note)
+            }
+            .setNegativeButton("No", null)
             .show()
     }
 }
